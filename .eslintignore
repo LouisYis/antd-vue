@@ -1,0 +1,4 @@
+build/*.js
+dev/*
+src/styles/*.scss
+*.spec.js

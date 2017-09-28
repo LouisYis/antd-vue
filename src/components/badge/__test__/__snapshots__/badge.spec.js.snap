@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge component component should match snapshot 1`] = `
+<span
+  class="vk-badge is-error is-small"
+  style="color: rgb(255, 255, 255);"
+/>
+`;

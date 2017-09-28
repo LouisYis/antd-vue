@@ -1,0 +1,34 @@
+@mixin zoom-motion($className, $keyframeName, $duration: $animation-duration-base) {
+  @include make-motion($className, $keyframeName,$duration);
+
+  .#{$className}-enter-active {
+    transform: scale(0);
+    animation-timing-function: $ease-out-circ;
+  }
+
+  .#{$className}-leave-active {
+    animation-timing-function: $ease-in-circ;
+  }
+}
+
+@include zoom-motion(zoom-big, vkZoomBig);
+
+@keyframes vkZoomBigIn {
+  0% {
+    opacity: 0;
+    transform: scale(.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes vkZoomBigOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(.8);
+  }
+}

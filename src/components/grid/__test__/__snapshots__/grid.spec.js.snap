@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Grid component component should match snapshot 1`] = `
+<div
+  class="vk-row"
+  style="margin-left: -5px; margin-right: -5px;"
+>
+  <div
+    class="vk-col-12"
+    style="padding-left: 5px; padding-right: 5px;"
+  >
+    column 1
+  </div>
+  <div
+    class="vk-xs-6 vk-xs-pull-2 vk-xs-offset-3"
+    style="padding-left: 5px; padding-right: 5px;"
+  >
+    column 2
+  </div>
+  <div
+    class="vk-col-6"
+    style="padding-left: 5px; padding-right: 5px;"
+  >
+    column 3
+  </div>
+</div>
+`;

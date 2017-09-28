@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropdown component component should match snapshot 1`] = `
+<div
+  class="vk-dropdown"
+>
+  <a>
+    button 1
+  </a>
+  <ul
+    class="vk-menu vk-dropdown-list is-float is-vertical is-topright"
+    style="display: none;"
+  >
+    <li
+      class="vk-sub-menu"
+    >
+      <div
+        class="vk-sub-menu-title"
+      >
+        item 1
+      </div>
+      <ul
+        class="vk-menu is-float"
+        style="display: none;"
+      >
+        <li
+          class="vk-menu-item"
+        >
+          item 1.0
+        </li>
+        <li
+          class="vk-menu-item"
+        >
+          item 1.1
+        </li>
+        <li
+          class="vk-menu-item"
+        >
+          item 1.2
+        </li>
+        <li
+          class="vk-sub-menu"
+        >
+          <div
+            class="vk-sub-menu-title"
+          >
+            item 5
+          </div>
+          <ul
+            class="vk-menu is-float"
+            style="display: none;"
+          >
+            <li
+              class="vk-menu-item"
+            >
+              item 1.1.0
+            </li>
+            <li
+              class="vk-menu-item"
+            >
+              item 1.1.1
+            </li>
+            <li
+              class="vk-menu-item"
+            >
+              item 1.1.2
+            </li>
+            <li
+              class="vk-menu-item"
+            >
+              item 1.1.3
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li
+      class="vk-menu-item"
+    >
+      item 2
+    </li>
+    <li
+      class="vk-sub-menu"
+    >
+      <div
+        class="vk-sub-menu-title"
+      >
+        item 3
+      </div>
+      <ul
+        class="vk-menu is-float"
+        style="display: none;"
+      >
+        <li
+          class="vk-menu-item"
+        >
+          item 3.0
+        </li>
+        <li
+          class="vk-menu-item"
+        >
+          item 3.1
+        </li>
+        <li
+          class="vk-menu-item"
+        >
+          item 3.2
+        </li>
+        <li
+          class="vk-menu-item"
+        >
+          item 3.3
+        </li>
+      </ul>
+    </li>
+    <li
+      class="vk-menu-item"
+    >
+      item 4
+    </li>
+  </ul>
+</div>
+`;

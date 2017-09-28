@@ -1,0 +1,58 @@
+.#{$prefix}-button {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0;
+  text-align: center;
+  cursor: pointer;
+  background-image: none;
+  border: $border-width-base solid transparent;
+  white-space: nowrap;
+  line-height: 1.15;
+  user-select: none;
+  transition: all .3s ease-in-out;
+  @include button-size($btn-height-base, $btn-padding-base, $btn-fontsize-base, $btn-border-radius-base);
+
+  &,
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &:not([disabled]):hover {
+    text-decoration: none;
+  }
+
+  &:not([disabled]):active {
+    outline: 0;
+    transition: none;
+  }
+
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &.is {
+    // size modify
+    &-sm {
+      @include button-size($btn-height-sm, $btn-padding-sm, $btn-fontsize-sm, $btn-border-radius-sm);
+    }
+
+    &-lg {
+      @include button-size($btn-height-lg, $btn-padding-lg, $btn-fontsize-lg, $btn-border-radius-lg);
+    }
+
+    // color modify
+    &-primary {
+      @include button-variant($btn-color-base, $brand-primary, $brand-primary);
+    }
+
+    // ghost style modify
+    &-ghost-primary {
+      @include button-variant($brand-primary, $brand-primary, $brand-primary, "ghost");
+    }
+  }
+}

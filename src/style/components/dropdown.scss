@@ -1,0 +1,37 @@
+.#{$prefix}-dropdown {
+  display: inline-block;
+  position: relative;
+  &-list {
+    position: absolute;
+    transition: all $animation-duration-base;
+
+    // modify
+    &.is {
+      &-bottom {
+        &left {
+          top: 100%;
+          left: 0;
+          transform-origin: 0% 0%;
+        }
+        &right {
+          top: 100%;
+          right: 0;
+          transform-origin: 0% 0%;
+        }
+      }
+
+      &-top {
+        &left {
+          bottom: 100%;
+          left: 0;
+          transform-origin: 100% 100%;
+        }
+        &right {
+          bottom: 100%;
+          right: 0;
+          transform-origin: 100% 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@mixin button-size($height, $padding, $font-size, $border-radius) {
+  padding: $padding;
+  height: $height;
+  font-size: $font-size;
+  border-radius: $border-radius;
+}
+
+@mixin button-disabled() {
+  &.disabled,
+  &[disabled] {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      @include button-color($btn-disable-color, $btn-disable-bg, $btn-disable-border);
+    }
+  }
+}
+
+@mixin button-color($color, $background, $border) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+}
+
+@mixin button-variant($color, $background, $border, $type: 'default') {
+  @include button-color($color, $background, $border);
+  @if $type == 'default' {
+    &:hover,
+    &:focus {
+      @include button-color($color, lighten($background, 10%), lighten($background, 10%));
+    }
+
+    &.active,
+    &:active {
+      @include button-color($color, darken($background, 10%), darken($background, 10%));
+    }
+  } @else if $type == 'ghost' {
+    @include button-color($color, transparent, $color);
+    &:hover,
+    &:focus {
+      @include button-color(lighten($color, 10%), transparent, lighten($color, 10%));
+    }
+    &.active,
+    &:active {
+      @include button-color(darken($color, 10%), transparent, darken($color, 10%));
+    }
+  }
+
+  @include button-disabled();
+}

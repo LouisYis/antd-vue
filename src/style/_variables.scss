@@ -1,0 +1,176 @@
+// global variables
+// ui prefix
+$prefix:                    "vk";
+//
+// Reassign color vars to semantic color scheme
+//
+// background color
+//
+$background-color-base:     #f7f9fb;
+// brand color
+$brand-primary:             #38acff;
+$brand-success:             #5ac83c;
+$brand-warning:             #f0a523;
+$brand-danger:              #f05050;
+
+$gray-light:                #999;
+$gray-base:                 #666;
+$gray-dark:                 #333;
+
+$disabled-color         : lighten(#000, 70%);
+$disabled-bg            : $background-color-base;
+
+// font base
+// size
+$font-size-base:            12px;
+$font-size-lg:              $font-size-base + 2px;
+$line-height-base:          1.5;
+// color
+$text-color:                #333;
+$text-light:                #666;
+$text-lightest:             #999;
+
+// mask backgroun color
+$mask-color:                color(#333 a(0.5));
+
+// border
+// border width
+$border-width-base:         1px;
+// border radius
+$border-radius-base:        4px;
+$border-radius-lg:          8px;
+// border color
+$border-color-base:         #f0f0f0;
+$border-color-dark:         #e0e0e0;
+
+$float-zindex:             1000;
+$mask-zindex:               1008;
+$pop-zindex:                1009;
+
+// panel gutter
+$panel-gutter:              20px;
+$page-pd-horizontal:        26px;
+
+$timimg-func:               cubic-bezier(.55, 0, .1, 1);
+// Animation
+$ease-out:                  cubic-bezier(0.215, 0.61, 0.355, 1);
+$ease-in:                   cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$ease-in-out:               cubic-bezier(0.645, 0.045, 0.355, 1);
+$ease-out-back:             cubic-bezier(0.12, 0.4, 0.29, 1.46);
+$ease-in-back:              cubic-bezier(0.71, -0.46, 0.88, 0.6);
+$ease-in-out-back:          cubic-bezier(0.71, -0.46, 0.29, 1.46);
+$ease-out-circ:             cubic-bezier(0.08, 0.82, 0.17, 1);
+$ease-in-circ:              cubic-bezier(0.6, 0.04, 0.98, 0.34);
+$ease-in-out-circ:          cubic-bezier(0.78, 0.14, 0.15, 0.86);
+$ease-out-quint:            cubic-bezier(0.23, 1, 0.32, 1);
+$ease-in-quint:             cubic-bezier(0.755, 0.05, 0.855, 0.06);
+$ease-in-out-quint:         cubic-bezier(0.86, 0, 0.07, 1);
+
+$animation-duration-slow:   .3s; // Modal
+$animation-duration-base:   .2s;
+$animation-duration-fast:   .1s; // Tooltip
+
+// Media queries breakpoints
+// Extra small screen / phone
+$screen-xs:                 480px;
+$screen-xs-min:             $screen-xs;
+
+// Small screen / tablet
+$screen-sm:                 768px;
+$screen-sm-min:             $screen-sm;
+
+// Medium screen / desktop
+$screen-md:                 992px;
+$screen-md-min:             $screen-md;
+
+// Large screen / wide desktop
+$screen-lg:                 1200px;
+$screen-lg-min:             $screen-lg;
+
+// Extra Large screen / full hd
+$screen-xl:                 1600px;
+$screen-xl-min:             $screen-xl;
+
+// provide a maximum
+$screen-xs-max:             ($screen-sm-min - 1px);
+$screen-sm-max:             ($screen-md-min - 1px);
+$screen-md-max:             ($screen-lg-min - 1px);
+$screen-lg-max:             ($screen-xl-min - 1px);
+
+// Grid system
+$grid-columns:              24;
+$grid-gutter-width:         0px;
+
+// components variable
+//
+// button
+$btn-color-base:            #fff;
+$btn-height-base:           28px;
+$btn-padding-base:          0 15px;
+$btn-fontsize-base:         $font-size-base;
+$btn-border-radius-base:    $border-radius-base;
+
+$btn-height-sm:             22px;
+$btn-padding-sm:            0 7px;
+$btn-fontsize-sm:           $font-size-base;
+$btn-border-radius-sm:      $border-radius-base;
+
+$btn-height-lg:             32px;
+$btn-padding-lg:            0 7px;
+$btn-fontsize-lg:           $font-size-lg;
+$btn-border-radius-lg:      $border-radius-lg;
+
+$btn-disable-color:         $disabled-color;
+$btn-disable-bg:            $disabled-bg;
+$btn-disable-border:        $border-color-base;
+
+// menu
+$menu-item-padding:         16px;
+$menu-item-fontsize:        12px;
+$menu-item-height:          42px;
+
+$menu-item-active-color:    $brand-primary;
+$menu-item-active-bg:       lighten($brand-primary, 35%);
+
+$menu-vertical-index:       $float-zindex;
+
+$menu-border-color:         $border-color-base;
+$menu-border-radius:        $border-radius-base;
+
+// badge
+$badge-padding-base:        2px 8px;
+$badge-padding-small:       2px 6px;
+$badge-fontsize-base:       12px;
+$badge-radius:              24px;
+
+// bread crumb
+$breadcrumb-fontsize:       $font-size-base;
+$breadcrumb-color:          $text-color;
+
+$breadcrumb-separator-color:$text-lightest;
+$breadcrumb-separator-margin: 0 8px;
+
+// pagination
+$pagination-item-margin:    8px;
+
+// mixins
+%ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+%clearfix {
+  zoom: 1;
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+  }
+}

@@ -1,0 +1,46 @@
+&.#{$prefix}-badge {
+  display: inline-block;
+  padding: 0 6px;
+  min-width: 20px;
+  color: #fff;
+  text-align: center;
+  height: 20px;
+  line-height: 20px;
+  font-size: $badge-fontsize-base;
+  border-radius: $badge-radius;
+
+  &.is {
+    // color modify
+    &-primary {
+      background: $brand-primary;
+    }
+    &-success {
+      background: $brand-success;
+    }
+    &-warning {
+      background: $brand-warning;
+    }
+    &-danger {
+      background: $brand-danger;
+    }
+
+    &-outline {
+      &-primary {
+        border: 1px solid $brand-primary;
+        color: $brand-primary;
+      }
+      &-success {
+        border: 1px solid $brand-success;
+        color: $brand-success;
+      }
+      &-warning {
+        border: 1px solid $brand-warning;
+        color: $brand-warning;
+      }
+      &-danger {
+        border: 1px solid $brand-danger;
+        color: $brand-danger;
+      }
+    }
+  }
+}

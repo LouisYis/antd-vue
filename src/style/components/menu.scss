@@ -1,0 +1,120 @@
+.#{$prefix}-menu {
+  outline: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0; // Override default ul/ol
+  list-style: none;
+  color: $text-color;
+  background: #fff;
+  line-height: 46px;
+  transition: all $animation-duration-base;
+
+  // menu modify
+  &.is {
+    &-vertical {
+      .#{$prefix}-menu {
+        position: absolute;
+        z-index: $menu-vertical-index;
+        top: 0;
+        left: 100%;
+        width: 100%;
+        transform-origin: 0 0;
+      }
+    }
+
+    &-float {
+      min-width: 130px;
+      border: 1px solid $menu-border-color;
+      border-radius: $menu-border-radius;
+    }
+
+    &-inline {
+      .#{$prefix}-menu {
+        // max-height: 1000px;
+        overflow: hidden;
+        transition: $animation-duration-slow $ease-in-out;
+
+        &-item {
+          &:after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-right: 3px solid $menu-item-active-color;
+            transform: scaleY(0);
+            transition: transform .15s $ease-out;
+          }
+
+          &.active {
+            &:after {
+              transform: scaleY(1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-item {
+    position: relative;
+    padding: 0 $menu-item-padding;
+    font-size: $menu-item-fontsize;
+    height: $menu-item-height;
+    line-height: $menu-item-height;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: color .15s $ease-in-out, background .3s $ease-in-out;
+
+    &.active {
+      color: $menu-item-active-color;
+      background-color: $menu-item-active-bg;
+    }
+
+    &:hover {
+      color: $brand-primary;
+    }
+  }
+}
+
+.#{$prefix}-sub-menu {
+  position: relative;
+  font-size: $menu-item-fontsize;
+
+  &.active {
+    > .#{$prefix}-sub-menu-title {
+      color: $brand-primary;
+    }
+  }
+  .#{$prefix}-menu-item {
+    padding-right: 0;
+  }
+
+  &-title {
+    padding: 0 $menu-item-padding;
+    height: $menu-item-height;
+    line-height: $menu-item-height;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+
+    &:hover {
+      color: $brand-primary;
+    }
+  }
+}
+
+// transfrom style
+.inline-enter,
+.inline-leave-to {
+  opacity: 0.5;
+  max-height: 0;
+  transition-timing-function: $ease-out-circ;
+}
+
+.inline-enter-to,
+.inline-leave {
+  max-height: 1000px;
+  transition-timing-function: $ease-in-out-circ;
+}

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreadCrumb component component should match snapshot 1`] = `
+<div
+  class="vk-breadcrumb"
+>
+  <span
+    class="vk-breadcrumb-item"
+  >
+    <span
+      class="vk-breadcrumb-item-name"
+    >
+      home
+    </span>
+    <span
+      class="vk-breadcrumb-separator"
+    >
+      >
+    </span>
+  </span>
+  <span
+    class="vk-breadcrumb-item"
+  >
+    <span
+      class="vk-breadcrumb-item-name"
+    >
+      hello
+    </span>
+    <span
+      class="vk-breadcrumb-separator"
+    >
+      >
+    </span>
+  </span>
+</div>
+`;
