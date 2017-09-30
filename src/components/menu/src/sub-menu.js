@@ -93,7 +93,7 @@ export default {
       }
     }, [ h('ul', {
       staticClass: 'vk-menu',
-      class: this.subClasses,
+      class: this.show,
       directives: [{
         name: 'show',
         value: this.isOpen

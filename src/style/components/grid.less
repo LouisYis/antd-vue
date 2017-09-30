@@ -1,35 +1,35 @@
-.#{$prefix}-col {
+.@{prefix}-col {
   position: relative;
   display: block;
 }
 
-.#{$prefix}-row {
-  @include make-grid-columns();
-  @include make-grid();
+.@{prefix}-row {
+  .make-grid-columns();
+  .make-grid();
   // Small grid
   //
-  @media (min-width: $screen-sm-min) {
-    @include make-grid(sm);
+  @media (min-width: @screen-sm-min) {
+    .make-grid(sm);
   }
   // Medium grid
   //
   // Columns, offsets, pushes, and pulls for the desktop device range.
 
-  @media (min-width: $screen-md-min) {
-    @include make-grid(md);
+  @media (min-width: @screen-md-min) {
+    .make-grid(md);
   }
 
   // Large grid
   //
   // Columns, offsets, pushes, and pulls for the large desktop device range.
 
-  @media (min-width: $screen-lg-min) {
-    @include make-grid(lg);
+  @media (min-width: @screen-lg-min) {
+    .make-grid(lg);
   }
 }
 
-.#{$prefix}-row {
-  @include make-row();
+.@{prefix}-row {
+  .make-row();
 
   &-flex {
     display: flex;

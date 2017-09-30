@@ -1,5 +1,6 @@
+const name = 'antv-button'
 export default {
-  name: 'antv-button',
+  name: name,
   props: {
     type: {
       type: String,
@@ -7,8 +8,7 @@ export default {
     },
     shape: String,
     size: String,
-    loading: [Boolean, Number],
-    method: Function
+    loading: [Boolean, Number]
   },
   data() {
     return {
@@ -26,18 +26,10 @@ export default {
       return classes
     }
   },
-  methods: {
-    handleClick() {
-      this.method && this.method()
-    }
-  },
   render(h) {
     const data = {
-      staticClass: this.name,
-      class: this.classes,
-      on: {
-        click: this.handleClick
-      }
+      staticClass: name,
+      class: this.classes
     }
 
     return h('button', data, [ this.$slots.default ])

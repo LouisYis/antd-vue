@@ -11,7 +11,8 @@ const webpack = require('webpack')
 const resolve = file => require('path').resolve(__dirname, file)
 
 const extractPlugin = ExtractTextPlugin.extract({
-  use: ['css-loader', 'postcss-loader', 'sass-loader']
+  use: ['css-loader', 'postcss-loader', 'less-loader'],
+  fallback: 'style-loader'
 })
 
 module.exports = {
@@ -51,7 +52,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(scss|sass)$/,
+        test: /\.less$/,
         loaders: extractPlugin,
         exclude: /node_modules/
       }

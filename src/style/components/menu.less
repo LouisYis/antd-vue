@@ -1,20 +1,20 @@
-.#{$prefix}-menu {
+.@{prefix}-menu {
   outline: none;
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 0; // Override default ul/ol
   list-style: none;
-  color: $text-color;
+  color: @text-color;
   background: #fff;
   line-height: 46px;
-  transition: all $animation-duration-base;
+  transition: all @animation-duration-base;
 
   // menu modify
   &.is {
     &-vertical {
-      .#{$prefix}-menu {
+      .@{prefix}-menu {
         position: absolute;
-        z-index: $menu-vertical-index;
+        z-index: @zindex-dropdown;
         top: 0;
         left: 100%;
         width: 100%;
@@ -24,15 +24,15 @@
 
     &-float {
       min-width: 130px;
-      border: 1px solid $menu-border-color;
-      border-radius: $menu-border-radius;
+      border: 1px solid @border-color-split;
+      border-radius: @border-radius-base;
     }
 
     &-inline {
-      .#{$prefix}-menu {
+      .@{prefix}-menu {
         // max-height: 1000px;
         overflow: hidden;
-        transition: $animation-duration-slow $ease-in-out;
+        transition: @animation-duration-slow @ease-in-out;
 
         &-item {
           &:after {
@@ -41,9 +41,9 @@
             right: 0;
             top: 0;
             bottom: 0;
-            border-right: 3px solid $menu-item-active-color;
+            border-right: 3px solid @primary-color;
             transform: scaleY(0);
-            transition: transform .15s $ease-out;
+            transition: transform .15s @ease-out;
           }
 
           &.active {
@@ -58,49 +58,49 @@
 
   &-item {
     position: relative;
-    padding: 0 $menu-item-padding;
-    font-size: $menu-item-fontsize;
-    height: $menu-item-height;
-    line-height: $menu-item-height;
+    padding: 0 16px;
+    font-size: @font-size-base;
+    height: 42px;
+    line-height: 42px;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
-    transition: color .15s $ease-in-out, background .3s $ease-in-out;
+    transition: color .15s @ease-in-out, background .3s @ease-in-out;
 
     &.active {
-      color: $menu-item-active-color;
-      background-color: $menu-item-active-bg;
+      color: @primary-color;
+      background-color: @primary-color;
     }
 
     &:hover {
-      color: $brand-primary;
+      color: @primary-color;
     }
   }
 }
 
-.#{$prefix}-sub-menu {
+.@{prefix}-sub-menu {
   position: relative;
-  font-size: $menu-item-fontsize;
+  font-size: @font-size-base;
 
   &.active {
-    > .#{$prefix}-sub-menu-title {
-      color: $brand-primary;
+    > .@{prefix}-sub-menu-title {
+      color: primary-color;
     }
   }
-  .#{$prefix}-menu-item {
+  .@{prefix}-menu-item {
     padding-right: 0;
   }
 
   &-title {
-    padding: 0 $menu-item-padding;
-    height: $menu-item-height;
-    line-height: $menu-item-height;
+    padding: 0 20px;
+    height: 42px;
+    line-height: 42px;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
 
     &:hover {
-      color: $brand-primary;
+      color: @primary-color;
     }
   }
 }
@@ -110,11 +110,11 @@
 .inline-leave-to {
   opacity: 0.5;
   max-height: 0;
-  transition-timing-function: $ease-out-circ;
+  transition-timing-function: @ease-out-circ;
 }
 
 .inline-enter-to,
 .inline-leave {
   max-height: 1000px;
-  transition-timing-function: $ease-in-out-circ;
+  transition-timing-function: @ease-in-out-circ;
 }

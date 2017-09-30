@@ -3,7 +3,8 @@ const baseWebpackConfig = require('./webpack.base.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var extractPlugin = ExtractTextPlugin.extract({
-  use: ['css-loader', 'postcss-loader', 'sass-loader']
+  use: ['css-loader', 'postcss-loader', 'less-loader'],
+  fallback: 'style-loader'
 })
 
 // Helpers
@@ -43,7 +44,7 @@ module.exports = merge(baseWebpackConfig, {
         exclude: /node_modules/
       },
       {
-        test: /\.(scss|sass)$/,
+        test: /\.less$/,
         use: extractPlugin,
         exclude: /node_modules/
       }

@@ -1,5 +1,5 @@
 // import styles
-import './style/index.scss'
+import './style/index.less'
 
 /* @remove-on-es-build-begin */
 // this file is not used if use https://github.com/ant-design/babel-plugin-import
@@ -24,6 +24,8 @@ export { default as Button } from './components/button'
 
 export { default as Dropdown } from './components/dropdown'
 
-export { Menu, MenuItem, SubMenu } from './components/menu'
+export { default as Menu } from './components/menu'
 
 export { default as Pagination } from './components/pagination'
+
+export { default as Modal } from './components/modal'

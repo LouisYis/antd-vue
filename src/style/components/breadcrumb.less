@@ -1,0 +1,21 @@
+.@{prefix}-breadcrumb {
+  margin: 0;
+  padding: 0;
+  font-size: @font-size-base;
+  color: @text-color;
+
+  &-item {
+    &:last-child {
+      font-weight: 500;
+
+      .@{prefix}-breadcrumb-separator {
+        display: none;
+      }
+    }
+  }
+
+  &-separator {
+    color: @text-color-secondary;
+    margin: 0 8px;
+  }
+}
