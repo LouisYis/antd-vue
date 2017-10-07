@@ -30,7 +30,7 @@ module.exports = merge(baseWebpackConfig, {
             loader: 'vue-loader',
             options: {
               loaders: {
-                stylus: extractPlugin
+                less: extractPlugin
               }
             }
           },

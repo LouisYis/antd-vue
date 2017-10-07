@@ -1,12 +1,13 @@
 import genModal from '../mixins/gen-modal'
 import transitionHook from '../mixins/transition-hook'
+import overlayable from '~mixins/overlayable'
 
 // set component name variables
 const componentName = 'antv-modal'
 
 export default {
   name: 'antv-modal',
-  mixins: [ genModal, transitionHook ],
+  mixins: [ genModal, transitionHook, overlayable ],
   props: {
     value: {
       type: Boolean,
@@ -46,7 +47,7 @@ export default {
       default: () => void 0
     },
     mousePosition: Object,
-    container: Object,
+    // container: Object,
     zIndex: Number
   },
   data() {
@@ -56,13 +57,12 @@ export default {
       modalOrigin: null
     }
   },
-  watch: {
-    value(val) {
-      if (val) this.show = val
-    },
-    show(val) {
-      this.$emit('input', val)
-      this.modalShow = val
+  computed: {
+    modalStyle() {
+      return {
+        transformOrigin: this.modalOrigin,
+        width: this.width
+      }
     }
   },
   methods: {
@@ -73,11 +73,15 @@ export default {
     handleConfirm() {
       this.modalShow = false
       this.onConfirm()
+    },
+    handleClose() {
+      this.modalShow = false
+      this.afterClose()
     }
   },
   render(h) {
-    return h('div', {
-      class: `${componentName}-wrap`,
+    const modal = h('div', {
+      class: [`${componentName}-wrap`, this.wrapClassName],
       style: {
         zIndex: this.zIndex
       },
@@ -86,5 +90,7 @@ export default {
         value: this.show
       }]
     }, [ this.genModal(h) ])
+
+    return h('div', [ modal, this.genOverlay() ])
   }
 }

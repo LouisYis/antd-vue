@@ -28,7 +28,12 @@ module.exports = {
     extensions: ['*', '.js', '.json', '.vue'],
     alias: {
       'ant-vue': resolve('../src'),
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      '~components': resolve('../src/components'),
+      '~directives': resolve('../src/directives'),
+      '~mixins': resolve('../src/mixins'),
+      '~util': resolve('../src/util'),
+      '~styles': resolve('../src/styles')
     }
   },
   module: {
@@ -40,7 +45,7 @@ module.exports = {
           loader: 'vue-loader',
           options: {
             loaders: {
-              stylus: extractPlugin
+              less: extractPlugin
             }
           }
         }, 'eslint-loader'],

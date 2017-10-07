@@ -19,7 +19,7 @@ function offset(el) {
     left: rect.left,
     top: rect.top
   }
-  console.log(pos)
+
   const doc = el.ownerDocument
   const w = doc.defaultView || doc.parentWindow
 
@@ -29,17 +29,28 @@ function offset(el) {
 }
 
 export default {
+  watch: {
+    value(val) {
+      if (val) this.show = val
+    },
+    show(val) {
+      this.$emit('input', val)
+      this.modalShow = val
+    },
+    modalShow(val) {
+      this.overlayShow = val
+    }
+  },
   methods: {
     beforeEnter(el) {
+      if (!this.mousePosition) return
       // get el's offset everytime
       // set el's display to get clientRect
       el.style.display = 'block'
       el.style.opacity = 0
 
       const modalOffset = offset(el)
-      this.modalOrigin = {
-        transformOrigin: `${this.mousePosition.x - modalOffset.left}px ${this.mousePosition.y - modalOffset.top}px`
-      }
+      this.modalOrigin = `${this.mousePosition.x - modalOffset.left}px ${this.mousePosition.y - modalOffset.top}px`
 
       el.style.opacity = 1
     },

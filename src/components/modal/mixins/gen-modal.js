@@ -48,7 +48,7 @@ export default {
       return this.closeable ? h('button', {
         class: `${name}-close`,
         on: {
-          click: this.handleCancel
+          click: this.handleClose
         }
       }, [ h('span', { class: `${name}-close-x` }) ]) : ''
     },
@@ -56,7 +56,7 @@ export default {
       const modal = h('div', {
         class: `${name}`,
         ref: 'modal',
-        style: [ this.modalOrigin ],
+        style: [ this.modalStyle, this.styles ],
         directives: [{
           name: 'show',
           value: this.modalShow
