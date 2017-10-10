@@ -36,7 +36,7 @@ export default {
       type: String,
       default: '取消'
     },
-    hideOnBlur: {
+    maskClosable: {
       type: Boolean,
       default: true
     },

@@ -1,3 +1,5 @@
+import '../styles/components/overlay.less'
+
 export default {
   props: {
     hideOverlay: Boolean,

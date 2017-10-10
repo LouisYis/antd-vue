@@ -1,4 +1,5 @@
 import Button from '../../../components/button'
+import clickoutside from '../../../directives/click-outside'
 
 // set component name variables
 const name = 'antv-modal'
@@ -6,6 +7,9 @@ const name = 'antv-modal'
 export default {
   components: {
     [Button.name]: Button
+  },
+  directives: {
+    clickoutside
   },
   methods: {
     genTitle(h) {
@@ -60,6 +64,10 @@ export default {
         directives: [{
           name: 'show',
           value: this.modalShow
+        }, {
+          name: 'clickoutside',
+          value: this.modalShow,
+          expression: 'handleClose'
         }]
       }, [
         h('div', {

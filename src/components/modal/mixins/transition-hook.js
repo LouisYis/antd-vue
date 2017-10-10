@@ -29,6 +29,11 @@ function offset(el) {
 }
 
 export default {
+  data() {
+    return {
+      modalOffset: null
+    }
+  },
   watch: {
     value(val) {
       if (val) this.show = val
@@ -49,8 +54,9 @@ export default {
       el.style.display = 'block'
       el.style.opacity = 0
 
-      const modalOffset = offset(el)
-      this.modalOrigin = `${this.mousePosition.x - modalOffset.left}px ${this.mousePosition.y - modalOffset.top}px`
+      // run offset method only component first show
+      if (!this.modalOffset) this.modalOffset = offset(el)
+      this.modalOrigin = `${this.mousePosition.x - this.modalOffset.left}px ${this.mousePosition.y - this.modalOffset.top}px`
 
       el.style.opacity = 1
     },
