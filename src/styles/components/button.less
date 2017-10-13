@@ -1,4 +1,4 @@
-@import "../index";
+@import "../variables";
 
 // for compatibile
 @btn-ghost-color: @text-color;
@@ -63,7 +63,7 @@
 
     &-circle,
     &-circle-outline {
-      .btn-circle(".@{prefix}-button");
+      .btn-circle(~"@{prefix}-button");
     }
   }
 
@@ -108,7 +108,7 @@
   }
 
   &-group {
-    .btn-group(".@{prefix}-button");
+    .btn-group(~"@{prefix}-button");
   }
 
   &:not(&-circle):not(&-circle-outline)&-icon-only {

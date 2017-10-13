@@ -1,3 +1,5 @@
+const prefix = 'antv-col'
+
 export default {
   name: 'antv-column',
   props: {
@@ -9,15 +11,11 @@ export default {
     sm: [Number, Object],
     md: [Number, Object],
     lg: [Number, Object],
-    xl: [Number, Object],
-    prefix: {
-      type: String,
-      default: 'vk'
-    }
+    xl: [Number, Object]
   },
   computed: {
     sizeClass() {
-      const { span, offset, push, pull, prefix } = this
+      const { span, offset, push, pull } = this
 
       let sizeClasses = {};
       ['xs', 'sm', 'md', 'lg', 'xl'].forEach(size => {
@@ -39,12 +37,12 @@ export default {
       })
 
       const classes = Object.assign({
-        [`${prefix}-col-${span}`]: span !== undefined,
-        [`${prefix}-col-pull-${pull}`]: pull !== undefined,
-        [`${prefix}-col-push-${push}`]: push !== undefined,
-        [`${prefix}-col-offset-${offset}`]: offset !== undefined
+        [`${prefix}-${span}`]: span !== undefined,
+        [`${prefix}-pull-${pull}`]: pull !== undefined,
+        [`${prefix}-push-${push}`]: push !== undefined,
+        [`${prefix}-offset-${offset}`]: offset !== undefined
       }, sizeClasses)
-
+      console.log(classes)
       return classes
     }
   },

@@ -1,3 +1,5 @@
+const componentCls = 'antv-row'
+
 export default {
   name: 'antv-row',
   props: {
@@ -17,7 +19,7 @@ export default {
       }
     },
     typeClass() {
-      return this.type ? `vk-row-${this.type}` : 'vk-row'
+      return this.type ? `${componentCls}-${this.type}` : componentCls
     },
     flexAttr() {
       if (this.type) {
@@ -40,10 +42,13 @@ export default {
     }
 
     const columns = this.$slots.default.map(item => {
-      item.data.style = {
-        paddingLeft: `${this.gutter / 2}px`,
-        paddingRight: `${this.gutter / 2}px`
+      if (this.gutter && item.data) {
+        item.data.style = {
+          paddingLeft: `${this.gutter / 2}px`,
+          paddingRight: `${this.gutter / 2}px`
+        }
       }
+
       return item
     })
 

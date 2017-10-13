@@ -1,5 +1,7 @@
+const prefix = 'antv'
+
 export default {
-  name: 'antv-menu-item',
+  name: `${prefix}-menu-item`,
   props: {
     keyVal: {
       type: String,
@@ -10,25 +12,27 @@ export default {
     return {
       active: false,
       key: null,
-      indent: {}
+      indent: {},
+      onClick: () => void 0,
+      prefixCls: 'antv'
     }
   },
   computed: {
     activeClass() {
-      return this.active ? 'active' : ''
+      return this.active ? `${this.prefixCls}-menu-item-selected` : ''
     }
   },
   methods: {
     handleClick(e) {
+      e.stopPropagation()
       if (this.active) return
 
-      this.$emit('menu-item-click', this.keyVal)
+      this.onClick(this)
     }
   },
   render(h) {
     const data = {
-      staticClass: 'vk-menu-item',
-      class: this.activeClass,
+      class: [`${this.prefixCls}-menu-item`, this.activeClass],
       style: this.indent,
       on: {
         click: this.handleClick

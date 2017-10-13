@@ -6,14 +6,15 @@ export default {
   },
   data() {
     return {
-      name: 'vk-sub-menu',
+      name: `${this.prefix}-sub-menu`,
       key: null,
       type: null,
       active: false,
       isOpen: false,
       isSelected: false,
       timer: null,
-      indent: {}
+      indent: {},
+      prefixCls: 'antv'
     }
   },
   watch: {
@@ -92,8 +93,7 @@ export default {
         name: this.transition
       }
     }, [ h('ul', {
-      staticClass: 'vk-menu',
-      class: this.show,
+      class: [this.show, `${this.prefixCls}-menu`],
       directives: [{
         name: 'show',
         value: this.isOpen

@@ -1,3 +1,6 @@
+import '../../styles/index'
 import '../../styles/components/modal.less'
 
-export { default } from './src/modal'
+import Modal from './src/modal'
+
+export default Modal

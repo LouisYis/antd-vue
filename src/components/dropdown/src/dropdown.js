@@ -1,3 +1,5 @@
+const prefix = 'antv'
+
 export default {
   name: 'antv-dropdown',
   props: {
@@ -14,6 +16,9 @@ export default {
     return {
       active: false
     }
+  },
+  mounted() {
+    this.setChildrenPrefix(this.$children)
   },
   computed: {
     transitionName() {
@@ -33,12 +38,28 @@ export default {
     },
     handleClick() {
       this.active = !this.active
+    },
+    setChildrenPrefix(elm) {
+      elm.forEach((e, i) => {
+        e.prefixCls = `${prefix}-dropdown`
+        if (e.$children.length > 0) {
+          this.setChildrenPrefix(e.$children)
+        }
+      })
+    },
+    genButton(h) {
+      this.$slots.button[0].data.on = {
+        mouseenter: this.handleMouseover
+      }
+      return this.$slots.button
     }
   },
   render(h) {
     const data = {
-      staticClass: 'vk-dropdown-list is-float vk-menu',
-      class: [`is-${this.position}`],
+      class: [
+        `is-${this.position}`,
+        `${prefix}-dropdown-list`
+      ],
       props: {
         onSelect: this.selectItem
       },
@@ -55,11 +76,10 @@ export default {
     }, [h('div', data, this.$slots.default)])
 
     return h('div', {
-      staticClass: 'vk-dropdown',
+      class: [`${prefix}-dropdown`],
       on: this.trigger === 'hover' ? {
-        mouseover: this.handleMouseover,
         mouseleave: this.handleMouseleave
       } : { click: this.handleClick }
-    }, [ this.$slots.button, list ])
+    }, [ this.genButton(), list ])
   }
 }

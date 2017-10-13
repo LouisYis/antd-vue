@@ -18,17 +18,17 @@ export default {
   },
   data() {
     return {
-      name: 'vk-menu',
       init: false,
       menuItem: [],
       subMenu: [],
-      currentMenu: null
+      currentMenu: null,
+      prefixCls: 'antv'
     }
   },
   computed: {
     classes() {
       return [
-        `is-${this.type}`
+        `${this.prefixCls}-menu-${this.type}`
       ]
     }
   },
@@ -83,7 +83,7 @@ export default {
           this.initMenuChild(e.$children, e.key)
         } else {
           // set item's key
-          e.$on('menu-item-click', this.handleClick)
+          // e.$on('menu-item-click', this.handleClick)
           this.menuItem.push(e)
         }
       })
@@ -98,8 +98,11 @@ export default {
   },
   render(h) {
     const data = {
-      staticClass: this.name,
-      class: this.classes
+      class: [
+        `${this.prefixCls}-menu`,
+        `${this.prefixCls}-menu-root`,
+        this.classes
+      ]
     }
 
     return h('div', data, this.$slots.default)
