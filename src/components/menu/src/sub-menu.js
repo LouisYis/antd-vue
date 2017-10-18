@@ -1,104 +1,241 @@
+import menuMixin from './menu-mixin'
+import PopMenu from './sub-pop-menu'
+
 export default {
   name: 'antv-sub-menu',
+  components: {
+    PopMenu
+  },
+  mixins: [ menuMixin ],
   props: {
     title: String,
-    keyVal: String
+    keyVal: {
+      type: String,
+      required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    className: String,
+    onMouseLeave: Function,
+    onMouseEnter: Function,
+    onTitleClick: Function,
+    onTitleMouseEnter: Function,
+    onTitleMouseLeave: Function
   },
   data() {
     return {
-      name: `${this.prefix}-sub-menu`,
-      key: null,
-      type: null,
-      active: false,
-      isOpen: false,
-      isSelected: false,
-      timer: null,
-      indent: {},
-      prefixCls: 'antv'
-    }
-  },
-  watch: {
-    // change parent sub menu when state change
-    active(newVal, oVal) {
-      if (newVal) {
-        this.$parent.active = newVal
-      }
-    },
-    isSelected(newVal) {
-      this.$parent.isSelected = newVal
-    },
-    isOpen(newVal) {
-      if (this.type !== 'inline') {
-        if (!this.isSelected) this.active = newVal
-      }
+      openKeys: [],
+      menuOpenChange: null,
+      onItemHover: null,
+      multiple: null,
+      mode: null,
+      closeSubMenuOnMouseLeave: true,
+      openSubMenuOnMouseEnter: true,
+      indent: null,
+      prefixCls: 'antv',
+      isSubmenu: 1
     }
   },
   computed: {
+    isOpen() {
+      return this.openKeys.indexOf(this.keyVal) !== -1
+    },
     classes() {
-      return {
-        'is-open': this.isOpen,
-        'active': this.active
+      return [{
+        [this.getOpenCls]: this.isOpen,
+        [this.getSelectCls]: this.isSelected,
+        [this.getModeCls]: this.mode,
+        [this.getThemeCls]: this.theme,
+        [this.className]: this.className
+      }, [
+        `${this.prefixCls}-submenu`
+      ]]
+    },
+    getModeCls() {
+      return `${this.prefixCls}-submenu-${this.mode}`
+    },
+    getOpenCls() {
+      return `${this.prefixCls}-submenu-open`
+    },
+    getSelectCls() {
+      return `${this.prefixCls}-submenu-selected`
+    },
+    titleIndent() {
+      if (this.mode === 'inline') {
+        return { paddingLeft: `${this.indent}px` }
+      } else {
+        return false
+      }
+    }
+  },
+  watch: {
+    mode(val) {
+      if (val === 'inline') {
+        this.closeSubMenuOnMouseLeave = false
+        this.openSubMenuOnMouseEnter = false
       }
     },
-    subClasses() {
-      return {
-        'is-float': this.type !== 'inline'
-      }
+    indent(val) {
+      this.$children.map(item => {
+        item.indent = this.indent * 2
+      })
     },
-    transition() {
-      return this.type === 'inline' ? 'inline' : 'zoom-big'
+    selectedKeys(val) {
+      this.setChildSelectedKeys(val)
     }
   },
   methods: {
-    toggleOpen(event) {
-      event.stopPropagation()
-      this.isOpen = !this.isOpen
+    setChildSelectedKeys(val) {
+      this.$children[0].selectedKeys = val
     },
-    onMouseover() {
-      this.active = true
-      this.isOpen = true
+    handleMouseEnter(e) {
+      this.clearSubMenuLeaveTimer()
+      this.onMouseEnter && this.MouseEnter({
+        key: this.keyVal,
+        domEvent: e
+      })
     },
-    onMouseout(e) {
-      this.isOpen = false
+    handleMouseLeave(e) {
+      const parentMenu = this.$parent
+      parentMenu.menuInstance = this
+      parentMenu.submenuLeaveFn = () => {
+        if (this.isOpen && this.closeSubMenuOnMouseLeave) {
+          this.onItemHover({
+            key: this.keyVal,
+            item: this,
+            hover: false,
+            trigger: 'mouseleave',
+            openChanges: [{
+              key: this.keyVal,
+              item: this,
+              trigger: 'mouseleave',
+              open: false
+            }]
+          })
+        }
+        // trigger mouseleave
+        this.onMouseLeave && this.onMouseLeave({
+          key: this.keyVal,
+          domEvent: e
+        })
+      }
+      parentMenu.subMenuLeaveTimer = setTimeout(parentMenu.submenuLeaveFn, 100)
+    },
+    handleTitleClick(e) {
+      this.onTitleClick && this.onTitleClick({
+        key: this.keyVal,
+        domEvent: e
+      })
+      if (this.openSubMenuOnMouseEnter) {
+        return
+      }
+      this.triggerOpenChange(!this.isOpen, 'click')
+    },
+    handleTitleMouseEnter(e) {
+      const parentMenu = this.$parent
+      this.clearSubMenuTitleLeaveTimer()
+      if (parentMenu.menuInstance) {
+        parentMenu.menuItemInstance.clearMenuItemMouseLeaveTimer()
+      }
+
+      let openChanges = []
+      if (this.openSubMenuOnMouseEnter) {
+        openChanges.push({
+          key: this.keyVal,
+          item: this,
+          trigger: 'mouseenter',
+          open: true
+        })
+      }
+      this.onItemHover({
+        key: this.keyVal,
+        item: this,
+        hover: true,
+        trigger: 'mouseenter',
+        openChanges
+      })
+
+      this.onTitleMouseEnter && this.onTitleMouseEnter({
+        key: this.keyVal,
+        domEvent: e
+      })
+    },
+    handleTitleMouseLeave(e) {
+      e.stopPropagation()
+
+      const parentMenu = this.$parent
+      parentMenu.menuInstance = this
+      parentMenu.subMenuTitleLeaveFn = () => {
+        if (this.mode === 'inline' && this.isOpen) {
+          this.onItemHover({
+            key: this.keyVal,
+            item: this,
+            hover: false,
+            trigger: 'mouseleave'
+          })
+        }
+
+        this.onTitleMouseLeave && this.onTitleMouseLeave({
+          key: this.keyVal,
+          domEvent: e
+        })
+      }
+      parentMenu.subMenuTitleLeaveTimer = setTimeout(parentMenu.subMenuTitleLeaveFn, 100)
+    },
+    triggerOpenChange(open, type) {
+      this.menuOpenChange({
+        key: this.keyVal,
+        item: this,
+        trigger: type,
+        open
+      })
     }
   },
   render(h) {
-    const data = {
-      staticClass: this.name,
-      class: this.classes
-    }
+    let mouseEvent = {}
+    let titleMouseEvent = {}
 
-    if (this.type !== 'inline') {
-      data.on = {
-        mouseleave: this.onMouseout,
-        mouseover: this.onMouseover
+    if (!this.disabled) {
+      mouseEvent = {
+        mouseenter: this.handleMouseEnter,
+        mouseleave: this.handleMouseLeave
+      }
+      titleMouseEvent = {
+        click: this.handleTitleClick,
+        mouseenter: this.handleTitleMouseEnter,
+        mouseleave: this.handleTitleMouseLeave
       }
     }
-
     // render title
     const title = h('div', {
-      staticClass: `${this.name}-title`,
-      style: this.indent,
+      class: [`${this.prefixCls}-submenu-title`],
+      style: this.titleIndent,
       domProps: {
         innerHTML: this.title
       },
       on: {
-        click: this.toggleOpen
+        ...titleMouseEvent
       }
     })
 
-    // render list
-    const list = h('transition', {
-      props: {
-        name: this.transition
+    const data = {
+      class: [
+        this.classes
+      ],
+      on: {
+        ...mouseEvent
       }
-    }, [ h('ul', {
-      class: [this.show, `${this.prefixCls}-menu`],
+    }
+
+    // render list
+    const list = h('PopMenu', {
       directives: [{
         name: 'show',
         value: this.isOpen
       }]
-    }, [ this.$slots.default ]) ])
+    }, [ this.$slots.default ])
 
     return h('div', data, [
       title,

@@ -41,7 +41,7 @@ export default {
     },
     setChildrenPrefix(elm) {
       elm.forEach((e, i) => {
-        e.prefixCls = `${prefix}-dropdown`
+        e.prefixCls = `${prefix}-dropdown-menu`
         if (e.$children.length > 0) {
           this.setChildrenPrefix(e.$children)
         }

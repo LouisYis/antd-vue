@@ -42,7 +42,7 @@ export default {
         [`${prefix}-push-${push}`]: push !== undefined,
         [`${prefix}-offset-${offset}`]: offset !== undefined
       }, sizeClasses)
-      console.log(classes)
+
       return classes
     }
   },

@@ -1,0 +1,35 @@
+.fade-motion(@className, @keyframeName) {
+  .make-motion(@className, @keyframeName, .15);
+  .@{className}-enter-active {
+    overflow: hidden;
+    animation-timing-function: @ease-in-circ;
+  }
+  .@{className}-leave-active {
+    overflow: hidden;
+    animation-timing-function: @ease-in-out-circ;
+  }
+}
+
+.fade-motion(collapse, antvCollapse);
+
+@keyframes antvCollapseIn {
+  0% {
+    opacity: .2;
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    max-height: 2000px;
+  }
+}
+
+@keyframes antvCollapseOut {
+  0% {
+    opacity: 1;
+    max-height: 2000px;
+  }
+  100% {
+    opacity: .2;
+    max-height: 0;
+  }
+}
