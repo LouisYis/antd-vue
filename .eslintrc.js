@@ -2,8 +2,8 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
+    parser: 'babel-eslint',
     sourceType: 'module'
   },
   env: {
@@ -16,27 +16,36 @@ module.exports = {
     'jest': true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
-  extends: 'standard',
+  extends: ['plugin:vue/essential', 'airbnb-base'],
   // required to lint *.vue files
   plugins: [
-    'html'
+    'vue'
   ],
+  settings: {
+    'import/resolver': {
+      webpack: {
+        config: 'build/webpack.base.conf.js'
+      }
+    }
+  },
   // add your custom rules here
-  'rules': {
-    // allow paren-less arrow functions
-    'arrow-parens': 0,
-    // allow async-await
-    'generator-star-spacing': 0,
-    // set maximum line characters
-    'max-len': [2, 140, 4, {'ignoreUrls': true, 'ignoreTemplateLiterals': true, 'ignoreStrings': true}],
-    // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    // disallow indentation using both tabs and spaces
-    'no-mixed-spaces-and-tabs': 2,
-    // ensure consistent 2 space indentation and indent cases under switch
-    'indent': [2, 2, {'SwitchCase': 1}],
-    'object-curly-spacing': [2, 'always'],
-    // never use space before funtion
-    'space-before-function-paren': ['error', 'never']
+  rules: {
+    'no-console': ["error", { allow: ["warn", "error"] }],
+    'max-len': 0,
+    // don't require .vue extension when importing
+    'import/extensions': ['error', 'always', {
+      js: 'never',
+      vue: 'never'
+    }],
+    // disallow reassignment of function parameters
+    // disallow parameter object manipulation except for specific exclusions
+    'no-param-reassign': ['error', {
+      props: true,
+      ignorePropertyModificationsFor: [
+        'vm', // vue view model
+        'el', // for dom element
+        'e' // for e.returnvalue
+      ]
+    }]
   }
 }

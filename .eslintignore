@@ -1,4 +1,4 @@
-build/*.js
+build/
 dev/*
 src/styles/*.scss
 *.spec.js
