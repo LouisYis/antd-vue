@@ -1,29 +1,33 @@
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-
-var extractPlugin = ExtractTextPlugin.extract({
-  use: ['css-loader', 'postcss-loader', 'less-loader'],
-  fallback: 'style-loader'
-})
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 // Helpers
-const resolve = file => require('path').resolve(__dirname, file)
+const resolve = require('./utils/resolve')
 
 module.exports = merge(baseWebpackConfig, {
-  devtool: '#source-map',
-  entry: {
-    app: './src/index.js'
-  },
+  mode: 'none',
+  entry: require('./utils/get-components').getCompoentnsEntries(),
   output: {
-    path: resolve('../dist'),
-    publicPath: '/dist/',
-    library: 'antv'
-  },
-  module: {
-    noParse: /es6-promise\.js$/, // avoid webpack shimming process
+    path: resolve('lib'),
+    library: 'antd'
   },
   performance: {
     hints: false
-  }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        use: genLoaders({
+          extract: true
+        })
+      }
+    ]
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'theme/[name].css'
+    })
+  ]
 })

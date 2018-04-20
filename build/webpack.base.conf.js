@@ -1,8 +1,8 @@
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
-const resolve = file => require('path').join(__dirname, '..', file)
+const resolve = require('./utils/resolve')
+const genLoaders = require('./utils/gen-loader')
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
@@ -14,28 +14,6 @@ const createLintingRule = () => ({
     emitWarning: true
   }
 })
-
-function genLoaders(options = {}) {
-  const styleLoaders = ['css', 'postcss']
-  const loaders = styleLoaders.map(item => {
-    const temp = {
-      loader: `${item}-loader`
-    }
-
-    return temp
-  })
-
-  const less = {
-    loader: 'less-loader',
-    options: Object.assign({
-      javascriptEnabled: true
-    }, options)
-  }
-
-  loaders.push(less)
-  // return [MiniCssExtractPlugin.loader].concat(loaders)
-  return loaders
-}
 
 module.exports = {
   resolve: {
@@ -57,7 +35,7 @@ module.exports = {
           loader: 'vue-loader',
           options: {
             loaders: {
-              less: genLoaders
+              less: genLoaders()
             },
             transformToRequire: {
               video: ['src', 'poster'],

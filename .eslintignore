@@ -1,4 +1,4 @@
-build/
-dev/*
 src/styles/*.scss
-*.spec.js
+lib/
+build/
+antd-vue/

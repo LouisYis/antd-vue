@@ -14,3 +14,5 @@ dev/*.js
 dev/*css
 !dev/index.js
 !dev/router.js
+
+demo/antd-vue
