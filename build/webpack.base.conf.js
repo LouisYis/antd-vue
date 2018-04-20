@@ -2,7 +2,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const resolve = require('./utils/resolve')
-const genLoaders = require('./utils/gen-loader')
+const { genStyleLoader } = require('./utils/gen-loader')
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
@@ -35,7 +35,7 @@ module.exports = {
           loader: 'vue-loader',
           options: {
             loaders: {
-              less: genLoaders()
+              less: genStyleLoader()
             },
             transformToRequire: {
               video: ['src', 'poster'],
@@ -54,7 +54,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        use: genLoaders()
+        use: genStyleLoader()
       }
     ]
   },

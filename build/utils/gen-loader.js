@@ -1,6 +1,6 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
-function genLoaders(options = {}) {
+function genStyleLoader(options = {}) {
   const styleLoaders = ['css', 'postcss']
   const loaders = styleLoaders.map(item => {
     const temp = {
@@ -26,4 +26,22 @@ function genLoaders(options = {}) {
   // return loaders
 }
 
-module.exports = genLoaders
+function genMarkdownLoader() {
+  return {
+    test: /\.md$/,
+    loader: 'vue-markdown-loader',
+    use: [
+      [require('markdown-it-anchor'), {
+        level: 2,
+        slugify: slugify,
+        permalink: true,
+        permalinkBefore: true
+      }],
+      [require('markdown-it-container'), {
+
+      }]
+    ]
+  }
+}
+
+module.exports = { genStyleLoader }

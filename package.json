@@ -63,6 +63,8 @@
     "less": "^2.7.3",
     "less-loader": "^4.1.0",
     "lolex": "^2.1.2",
+    "markdown-it-anchor": "^4.0.0",
+    "markdown-it-container": "^2.0.0",
     "mini-css-extract-plugin": "^0.4.0",
     "nightwatch": "^0.9.8",
     "node-notifier": "^5.2.1",
