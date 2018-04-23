@@ -5,6 +5,7 @@ const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const resolve = require('./utils/resolve')
 const packageConfig = require('../package.json')
+const genMarkdownLoader = require('./utils/gen-loader').genMarkdownLoader
 
 const config = {
   root: 'demo',
@@ -19,6 +20,11 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   output: {
     filename: '[name].js',
     path: config.assetsRoot,
+  },
+  module: {
+    rules: [
+      genMarkdownLoader()
+    ]
   },
   plugins: [
     // new OptimizeCssAssetsPlugin({

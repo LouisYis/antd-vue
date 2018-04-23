@@ -2,7 +2,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const resolve = require('./utils/resolve')
-const { genStyleLoader } = require('./utils/gen-loader')
+const genStyleLoader = require('./utils/gen-loader').genStyleLoader
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,

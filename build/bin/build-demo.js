@@ -66,7 +66,7 @@ function getConfig(mode) {
 
   if (mode === 'development') {
     return new Promise((resolve, reject) => {
-      portfinder.basePort = 8080
+      portfinder.basePort = 8088
       portfinder.getPort((err, port) => {
         if (err) {
           reject(err)
