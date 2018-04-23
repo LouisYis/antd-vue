@@ -8,11 +8,5 @@ node_modules/
 npm-debug.log
 coverage/
 
-Playground.vue
-report.html
-dev/*.js
-dev/*css
-!dev/index.js
-!dev/router.js
-
 demo/antd-vue
+lib/

@@ -1,6 +1,7 @@
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const genStyleLoader = require('./utils/gen-loader').genStyleLoader
 
 // Helpers
 const resolve = require('./utils/resolve')
@@ -14,16 +15,6 @@ module.exports = merge(baseWebpackConfig, {
   },
   performance: {
     hints: false
-  },
-  module: {
-    rules: [
-      {
-        test: /\.less$/,
-        use: genLoaders({
-          extract: true
-        })
-      }
-    ]
   },
   plugins: [
     new MiniCssExtractPlugin({
