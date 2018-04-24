@@ -1,22 +1,22 @@
-import Vue from 'Vue'
-import { Menu, MenuItem, SubMenu } from '../index'
+import Vue from 'Vue';
+import { Menu, MenuItem, SubMenu } from '../index';
 
-let selectId = null
+let selectId = null;
 
 const MenuInstance = new Vue({
   components: {
     [Menu.name]: Menu,
     [MenuItem.name]: MenuItem,
-    SubMenu
+    SubMenu,
   },
   methods: {
     getChild(id, len) {
-      let children = []
+      const children = [];
       for (let i = 0; i < len; i++) {
-        children.push(<vk-menu-item keyVal={`${id}.${i}`}>{`${id}.${i}`}</vk-menu-item>)
+        children.push(<vk-menu-item keyVal={`${id}.${i}`}>{`${id}.${i}`}</vk-menu-item>);
       }
-      return children
-    }
+      return children;
+    },
   },
   render(h) {
     const props = {
@@ -24,11 +24,11 @@ const MenuInstance = new Vue({
       defaultSelect: '1.0',
       autoClose: true,
       onSelect(key) {
-        selectId = key
-      }
-    }
+        selectId = key;
+      },
+    };
     return (
-      <vk-menu {...{props}}>
+      <vk-menu {...{ props }}>
         <SubMenu title="item 1">
           {this.getChild(1, 3)}
           <SubMenu title="item 5">
@@ -41,36 +41,36 @@ const MenuInstance = new Vue({
         </SubMenu>
         <vk-menu-item key-val="4">item 4</vk-menu-item>
       </vk-menu>
-    )
-  }
-}).$mount()
+    );
+  },
+}).$mount();
 
 describe('Menu component', () => {
   test('component should match snapshot', () => {
-    expect(MenuInstance.$el).toMatchSnapshot()
-  })
+    expect(MenuInstance.$el).toMatchSnapshot();
+  });
 
   test('component select func run currectly', () => {
-    expect(selectId).not.toBeNull
-  })
+    expect(selectId).not.toBeNull;
+  });
 
   test('component props required', () => {
-    expect(Menu.props.onSelect).not.toBeUndefined()
-  })
-})
+    expect(Menu.props.onSelect).not.toBeUndefined();
+  });
+});
 
 describe('Menu item component', () => {
   test('component props required', () => {
-    expect(MenuItem.props.keyVal).not.toBeUndefined()
-  })
-})
+    expect(MenuItem.props.keyVal).not.toBeUndefined();
+  });
+});
 
 describe('SubMenu item component', () => {
   test('component props required', () => {
-    expect(SubMenu.props.title).not.toBe(undefined)
-  })
+    expect(SubMenu.props.title).not.toBe(undefined);
+  });
 
   test('component data required', () => {
-    expect(SubMenu.data().isOpen).toBe(false)
-  })
-})
+    expect(SubMenu.data().isOpen).toBe(false);
+  });
+});

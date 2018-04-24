@@ -13,6 +13,7 @@ module.exports = {
     'expect': true,
     'describe': true,
     'it': true,
+    'test': true,
     'jest': true
   },
   // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
@@ -30,8 +31,9 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
-    'no-console': ["error", { allow: ["warn", "error"] }],
-    'max-len': 0,
+    'no-console': 0,
+    'semi': [2, 'always'],
+    'comma-dangle': 0,
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       js: 'never',

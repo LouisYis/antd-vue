@@ -1,21 +1,21 @@
-import Vue from 'vue'
-import DropDown from '../index'
-import { MenuItem, SubMenu } from '@/components/ui/menu'
+import Vue from 'vue';
+import DropDown from '../index';
+import { MenuItem, SubMenu } from '@/components/ui/menu';
 
 const DropdownInstance = new Vue({
   components: {
     DropDown,
     SubMenu,
-    [MenuItem.name]: MenuItem
+    [MenuItem.name]: MenuItem,
   },
   methods: {
     getChild(key, len) {
-      let children = []
+      const children = [];
       for (let i = 0; i < len; i++) {
-        children.push(<vk-menu-item keyVal={`${key}.${i}`}>{`item ${key}.${i}`}</vk-menu-item>)
+        children.push(<vk-menu-item keyVal={`${key}.${i}`}>{`item ${key}.${i}`}</vk-menu-item>);
       }
-      return children
-    }
+      return children;
+    },
   },
   render(h) {
     return (
@@ -33,12 +33,12 @@ const DropdownInstance = new Vue({
         </sub-menu>
         <vk-menu-item key-val="4">item 4</vk-menu-item>
       </drop-down>
-    )
-  }
-}).$mount()
+    );
+  },
+}).$mount();
 
 describe('Dropdown component', () => {
   test('component should match snapshot', () => {
-    expect(DropdownInstance.$el).toMatchSnapshot()
-  })
-})
+    expect(DropdownInstance.$el).toMatchSnapshot();
+  });
+});
