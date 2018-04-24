@@ -62,7 +62,9 @@ function genMarkdownLoader() {
             }
             return '</div></demo-block>\n';
           }
-        }]
+        }],
+        [require('markdown-it-container'), 'tip'],
+        [require('markdown-it-container'), 'warning']
       ],
       preprocess: function(MarkdownIt, source) {
         MarkdownIt.renderer.rules.table_open = function() {
