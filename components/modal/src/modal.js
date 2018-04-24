@@ -6,7 +6,7 @@ import transitionHook from '../mixins/transition-hook';
 const componentName = 'antv-modal';
 
 export default {
-  name: 'antv-modal',
+  name: 'VntModal',
   mixins: [genModal, transitionHook, overlayable],
   props: {
     value: {

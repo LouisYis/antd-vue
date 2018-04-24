@@ -1,5 +1,5 @@
 export default {
-  name: 'antv-badge',
+  name: 'VntBadge',
   props: {
     color: String,
     backgroundcolor: String,
@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      name: 'vk-badge',
+      name: 'vnt-badge',
     };
   },
   computed: {

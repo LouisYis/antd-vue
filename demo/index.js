@@ -1,11 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import App from './App';
 import routes from './router';
+import Vnt from '../src';
+import DemoBlock from './components/demo-block';
+import '../src/styles';
 
+Vue.component(DemoBlock.name, DemoBlock);
+
+Vue.use(Vnt);
 Vue.use(VueRouter);
-
-console.log(routes);
 const router = new VueRouter({
   routes,
 });

@@ -1,6 +1,7 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const slugify = require('transliteration').slugify
-const striptags = require('./markdown-utils')
+const md = require('markdown-it')()
+const utils = require('./markdown-utils')
 
 function genStyleLoader(options = {}) {
   const styleLoaders = ['css', 'postcss']
@@ -49,7 +50,7 @@ function genMarkdownLoader() {
             if (tokens[idx].nesting === 1) {
               var description = (m && m.length > 1) ? m[1] : '';
               var content = tokens[idx + 1].content;
-              var html = convert(striptags.strip(content, ['script', 'style'])).replace(/(<[^>]*)=""(?=.*>)/g, '$1');
+              var html = utils.convert(utils.strip(content, ['script', 'style'])).replace(/(<[^>]*)=""(?=.*>)/g, '$1');
               var descriptionHTML = description
                 ? md.render(description)
                 : '';
@@ -67,7 +68,7 @@ function genMarkdownLoader() {
         MarkdownIt.renderer.rules.table_open = function() {
           return '<table class="table">';
         };
-        MarkdownIt.renderer.rules.fence = striptags.wrap(MarkdownIt.renderer.rules.fence);
+        MarkdownIt.renderer.rules.fence = utils.wrap(MarkdownIt.renderer.rules.fence);
         return source;
       }
     }

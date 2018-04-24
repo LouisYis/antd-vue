@@ -1,7 +1,7 @@
 const prefix = 'antv';
 
 export default {
-  name: 'antv-dropdown',
+  name: 'VntDropdown',
   props: {
     trigger: {
       type: String,

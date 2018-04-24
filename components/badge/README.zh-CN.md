@@ -9,11 +9,12 @@ import Badge from '@component/ui/badge'
 ```
 
 ### Useage
-custom size
+::: demo custom size
 ```html
-<badge size="normal"></badge>
-<badge size="small"></badge>
+<vnt-badge size="normal">demo</vnt-badge>
+<vnt-badge size="small"></vnt-badge>
 ```
+:::
 
 and color type
 ```html

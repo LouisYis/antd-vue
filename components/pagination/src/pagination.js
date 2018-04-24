@@ -1,7 +1,7 @@
 import genItem from './gen-button';
 
 export default {
-  name: 'vk-pagination',
+  name: 'VntPagination',
   mixins: [genItem],
   props: {
     defaultCurrent: {

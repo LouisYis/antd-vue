@@ -1,5 +1,5 @@
 export default {
-  name: 'antv-breadcrumb',
+  name: 'VntBreadcrumb',
   props: {
     routes: [Object, Array],
     separator: {

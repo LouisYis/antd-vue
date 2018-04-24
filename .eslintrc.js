@@ -31,6 +31,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    'max-len': 0,
     'no-console': 0,
     'semi': [2, 'always'],
     'comma-dangle': 0,

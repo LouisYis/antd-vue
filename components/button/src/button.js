@@ -1,4 +1,4 @@
-const name = 'antv-button';
+const name = 'VntButton';
 export default {
   name,
   props: {
