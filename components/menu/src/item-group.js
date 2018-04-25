@@ -1,7 +1,7 @@
 import menuMixin from './menu-mixin';
 
 export default {
-  name: 'antv-item-group',
+  name: 'VntItemGroup',
   mixins: [menuMixin],
   props: {
     title: String,

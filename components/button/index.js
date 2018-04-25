@@ -1,4 +1,3 @@
-import '@/styles/index';
-import '@/styles/components/button.less';
+import './style/index';
 
 export { default } from './src/button';

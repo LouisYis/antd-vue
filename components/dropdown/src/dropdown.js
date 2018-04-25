@@ -40,7 +40,7 @@ export default {
       this.active = !this.active;
     },
     setChildrenPrefix(elm) {
-      elm.forEach((e) => {
+      elm.forEach(e => {
         e.prefixCls = `${prefix}-dropdown-menu`;
         if (e.$children.length > 0) {
           this.setChildrenPrefix(e.$children);

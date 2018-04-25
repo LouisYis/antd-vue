@@ -13,7 +13,7 @@ export default {
   },
   watch: {
     indent() {
-      this.$children.forEach((el) => {
+      this.$children.forEach(el => {
         el.indent = this.indent;
       });
     },

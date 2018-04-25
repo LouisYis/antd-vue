@@ -1,7 +1,6 @@
-const prefix = 'antv';
 
 export default {
-  name: `${prefix}-menu-item`,
+  name: 'VntMenuItem',
   props: {
     keyVal: {
       type: String,

@@ -1,5 +1,5 @@
 export default {
-  name: 'antv-divider',
+  name: 'VntDivider',
   props: {
     className: '',
   },

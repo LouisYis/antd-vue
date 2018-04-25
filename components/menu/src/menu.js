@@ -162,7 +162,7 @@ export default {
     // open change handler
     // all submenu open will call this methods
     handleOpenChange(item) {
-      const handleSingle = (e) => {
+      const handleSingle = e => {
         let opened = false;
         if (e.open) {
           opened = this.openKeys.indexOf(e.key) === -1;
@@ -207,7 +207,7 @@ export default {
       const childArr = [];
       function loopChildren(elm) {
         if (elm) {
-          elm.forEach((e) => {
+          elm.forEach(e => {
             childArr.push(e);
             if (e.$children.length) loopChildren(e.$children, e.key);
           });
@@ -250,12 +250,12 @@ export default {
       return this.mode;
     },
     loopChildProps() {
-      this.flatItemArr.forEach((item) => {
+      this.flatItemArr.forEach(item => {
         this.setChildrenProps(item);
       });
     },
     setChildIndent(indent) {
-      this.$children.forEach((el) => {
+      this.$children.forEach(el => {
         el.indent = indent;
       });
     },

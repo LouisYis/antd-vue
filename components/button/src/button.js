@@ -1,37 +1,23 @@
-const name = 'VntButton';
 export default {
-  name,
+  name: 'VntButton',
   props: {
-    type: {
+    tag: {
       type: String,
-      default: 'primary',
+      default: 'button'
     },
+    type: String,
     shape: String,
     size: String,
-    loading: [Boolean, Number],
-  },
-  data() {
-    return {
-      name: 'vk-button',
-    };
-  },
-  computed: {
-    classes() {
-      const classes = [];
-      [this.type, this.shape, this.size].forEach((style) => {
-        if (style) {
-          classes.push(`is-${style}`);
-        }
-      });
-      return classes;
-    },
+    loading: [Boolean, Number]
   },
   render(h) {
-    const data = {
-      staticClass: name,
-      class: this.classes,
-    };
+    const classes = [this.type, this.shape, this.size].map(prop => {
+      if (prop) {
+        return `vnt-btn-${prop}`;
+      }
+      return '';
+    }).concat('vnt-btn');
 
-    return h('button', data, [this.$slots.default]);
+    return h(this.tag, { class: classes }, [this.$slots.default]);
   },
 };

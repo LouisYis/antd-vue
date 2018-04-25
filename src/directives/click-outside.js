@@ -6,7 +6,7 @@ export default {
   bind(el, binding, vnode) {
     elVisible = vnode.context.show;
 
-    const documentHandler = (e) => {
+    const documentHandler = e => {
       if (vnode.context && !el.contains(e.target)) {
         if (elVisible && vnode.context.maskClosable) {
           vnode.context[el[clickoutsideContext].methodName]();

@@ -2,7 +2,7 @@ const webPrefix = ['moz', 'ms', 'webkit'];
 
 function requestAnimationPolyfill() {
   let lastTime = 0;
-  return (callback) => {
+  return callback => {
     const currTime = new Date().getTime;
     const timetoCall = Math.max(0, 16 - (currTime - lastTime));
     const id = window.setTimeout(() => {

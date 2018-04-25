@@ -92,7 +92,7 @@ export default {
       }
     },
     indent() {
-      this.$children.forEach((el) => {
+      this.$children.forEach(el => {
         el.indent = this.indent * 2;
       });
     },

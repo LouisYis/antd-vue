@@ -33,8 +33,8 @@ module.exports = {
   rules: {
     'max-len': 0,
     'no-console': 0,
-    'semi': [2, 'always'],
     'comma-dangle': 0,
+    'arrow-parens': ['error', 'as-needed'],
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       js: 'never',

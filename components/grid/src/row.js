@@ -1,57 +1,39 @@
-const componentCls = 'antv-row';
-
 export default {
-  name: 'antv-row',
+  name: 'VntRow',
+  componentName: 'VntRow',
   props: {
-    gutter: Number,
-    type: String,
-    align: String,
-    justify: String,
-  },
-  computed: {
-    propsStyle() {
-      const gutter = this.gutter / 2;
-      return {
-        marginLeft: `-${gutter}px`,
-        marginRight: `-${gutter}px`,
-      };
+    tag: {
+      type: String,
+      default: 'div'
     },
-    typeClass() {
-      return this.type ? `${componentCls}-${this.type}` : componentCls;
+    align: {
+      type: String,
+      default: 'top'
     },
-    flexAttr() {
-      const classArr = [];
-      if (this.type) {
-        if (this.align) {
-          classArr.push(`is-flex-${this.align}`);
-        }
-        if (this.justify) {
-          classArr.push(`is-flex-${this.justify}`);
-        }
-      }
-
-      return classArr;
+    gutter: {
+      type: [Number, Object],
+      default: 0
     },
+    justify: {
+      type: String,
+      default: 'start'
+    },
+    type: String
   },
   render(h) {
-    const data = {
-      class: [this.typeClass, this.flexAttr],
-      style: this.propsStyle,
+    const typeCls = this.type ? `vnt-row-${this.type}` : 'vnt-row';
+    const style = {
+      marginLeft: `-${this.gutter / 2}px`
     };
+    style.marginRight = style.marginLeft;
 
-    const columns = this.$slots.default.map((item) => {
-      const tempItem = item;
-
-      if (this.gutter && item.tempItem) {
-        tempItem.data.style = {
-          paddingLeft: `${this.gutter / 2}px`,
-          paddingRight: `${this.gutter / 2}px`,
-        };
-      }
-
-      return tempItem;
-    });
-
-    return h('div', data, columns);
-  },
+    return h(this.tag, {
+      class: [
+        typeCls,
+        `is-justify-${this.justify}`,
+        `is-align-${this.align}`
+      ],
+      style
+    }, [this.$slots.default]);
+  }
 };
