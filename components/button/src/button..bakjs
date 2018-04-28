@@ -10,6 +10,9 @@ export default {
     size: String,
     loading: [Boolean, Number]
   },
+  created() {
+    console.log(this.$listeners);
+  },
   render(h) {
     const classes = [this.type, this.shape, this.size].map(prop => {
       if (prop) {
@@ -18,6 +21,9 @@ export default {
       return '';
     }).concat('vnt-btn');
 
-    return h(this.tag, { class: classes }, [this.$slots.default]);
+    return h(this.tag, {
+      class: classes,
+      on: this.$listeners
+    }, [this.$slots.default]);
   },
 };

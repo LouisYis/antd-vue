@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import routes from './router';
 import Vnt from '../src';
 import DemoBlock from './components/demo-block';
-import '../src/styles';
+import '../components/style';
 
 Vue.component(DemoBlock.name, DemoBlock);
 

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <vnt-row>
+    <Row>
       <vnt-col :span="4">1</vnt-col>
       <vnt-col :span="20">
         <router-view />
       </vnt-col>
-    </vnt-row>
+    </Row>
   </div>
 </template>
 

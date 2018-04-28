@@ -1,24 +1,30 @@
 import { Row, Col } from '../components/grid';
 import { Menu, MenuItem, SubMenu, Divider, MenuItemGroup } from '../components/menu';
 import Button from '../components/button';
+// import Icon from '../components/icon';
 
-const components = [
+const components = {
   Row,
-  Col,
   Menu,
   MenuItem,
   SubMenu,
   Divider,
   MenuItemGroup,
   Button
-];
+};
+
+const alias = {
+  ...components,
+  VntCol: Col,
+  VButton: Button
+};
 
 const install = function install(Vue) {
-  components.forEach(file => {
-    console.log(file.name);
-    Vue.component(file.name, file);
+  Object.keys(alias).forEach(key => {
+    Vue.component(key, alias[key]);
   });
 };
 
-module.exports = { install };
-module.exports.default = module.exports;
+export default {
+  install
+};
