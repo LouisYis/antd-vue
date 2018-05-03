@@ -10,6 +10,6 @@ export default {
       }
     ];
 
-    return h('i', { classes });
+    return h('i', { class: classes });
   }
 };

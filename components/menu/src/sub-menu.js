@@ -11,7 +11,7 @@ export default {
     title: String,
     keyVal: {
       type: String,
-      required: true,
+      // required: true,
     },
     disabled: {
       type: Boolean,

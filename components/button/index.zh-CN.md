@@ -2,7 +2,7 @@
   export default {
     methods: {
       test() {
-        alert('111')
+        console.log('111');
       }
     }
   }
@@ -21,9 +21,15 @@
 
 ```html
 <v-button type="primary" shape="circle" icon="search"></v-button>
+<v-button type="primary" icon="search">Search</v-button>
 
-<v-button>Default</v-button>
-<v-button type="dashed">Dashed</v-button>
-<v-button type="danger">Danger</v-button>
+<v-button shape="circle" icon="search"></v-button>
+<v-button icon="search">Search</v-button>
+
+<v-button type="dashed" shape="circle" icon="search"></v-button>
+<v-button type="dashed" icon="search">Search</v-button>
+
+<v-button type="danger" shape="circle" icon="search"></v-button>
+<v-button type="danger" icon="search">Search</v-button>
 ```
 :::

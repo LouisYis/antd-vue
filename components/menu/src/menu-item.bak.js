@@ -4,7 +4,7 @@ export default {
   props: {
     keyVal: {
       type: String,
-      required: true,
+      // required: true,
     },
     onMouseEnter: {
       type: Function,

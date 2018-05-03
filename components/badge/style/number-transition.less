@@ -1,0 +1,59 @@
+@import "../../style/themes/default";
+
+@number-prefix-cls: ~"@{vnt-prefix}-scroll-number";
+
+.@{number-prefix-cls} {
+  &-only {
+    vertical-align: top;
+  }
+}
+
+.@{vnt-prefix}-number-scroll-increase {
+  &-enter-active,
+  &-leave-active {
+    animation-name: vntNumberIncrease;
+    animation-duration: .3s;
+  }
+
+  &-enter-active {
+    animation-fill-mode: @ease-out-back;
+  }
+
+  &-leave-active {
+    animation-fill-mode: @ease-in-back;
+  }
+}
+
+.@{vnt-prefix}-number-scroll-decrease {
+  &-enter-active,
+  &-leave-active {
+    animation-name: vntNumberDecrease;
+    animation-duration: .3s;
+  }
+
+  &-enter-active {
+    animation-fill-mode: @ease-out-back;
+  }
+
+  &-leave-active {
+    animation-fill-mode: @ease-in-back;
+  }
+}
+
+@keyframes vntNumberIncrease {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes vntNumberDecrease {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}

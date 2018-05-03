@@ -1,4 +1,3 @@
-import '@/styles';
-import '@/styles/components/badge.less';
+import './style';
 
 export { default } from './src/badge';
