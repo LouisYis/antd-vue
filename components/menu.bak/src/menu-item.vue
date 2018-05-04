@@ -1,19 +1,14 @@
 <template>
-  <li :class="classes" :style="indent">
+  <li :class="classes">
     <slot></slot>
   </li>
 </template>
 
 <script>
-import menuMixin from './menu-mixin';
-
 export default {
-  mixins: [menuMixin],
+  inject: ['rootMenu'],
   props: {
-    index: {
-      type: String,
-      required: true
-    }
+    index: String
   },
   computed: {
     classes() {

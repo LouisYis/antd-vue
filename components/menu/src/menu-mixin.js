@@ -1,44 +1,20 @@
 export default {
-  data() {
-    return {
-      selectedKeys: [],
-      // timer
-      menuInstance: null,
-      subMenuTitleLeaveTimer: null,
-      subMenuTitleLeaveFn: null,
-      subMenuLeaveTimer: null,
-      subMenuLeaveFn: null,
-      menuItemMouseLeaveTimer: null,
-      menuItemMouseLeaveFn: null,
-    };
-  },
+  inject: ['rootMenu'],
   computed: {
-    isSelected() {
-      const { selectedKeys } = this;
-      const isSelected = this.$children.find(item => selectedKeys.indexOf(item.keyVal) !== -1 || item.isSelected);
-      return isSelected;
-    },
-  },
-  methods: {
-    clearSubMenuTimers() {
-      this.clearSubMenuLeaveTimer();
-      this.clearSubMenuTitleLeaveTimer();
-    },
-    clearSubMenuTitleLeaveTimer() {
-      const parentMenu = this.$parent;
-      if (parentMenu.subMenuTitleLeaveTimer) {
-        clearTimeout(parentMenu.subMenuTitleLeaveTimer);
-        parentMenu.subMenuTitleLeaveTimer = null;
-        parentMenu.subMenuTitleLeaveFn = null;
+    indent() {
+      if (this.rootMenu.mode !== 'inline') return {};
+      const indent = this.rootMenu.inlineIndent;
+
+      let parent = this.$parent;
+      let padding = indent;
+      while (parent && parent.$options.componentName !== 'VntMenu') {
+        if (parent.$options.componentName === 'VntSubMenu') {
+          padding += indent;
+        }
+        parent = parent.$parent;
       }
-    },
-    clearSubMenuLeaveTimer() {
-      const parentMenu = this.$parent;
-      if (parentMenu.subMenuLeaveTimer) {
-        clearTimeout(parentMenu.subMenuLeaveTimer);
-        parentMenu.subMenuLeaveTimer = null;
-        parentMenu.subMenuLeaveFn = null;
-      }
-    },
-  },
+
+      return { paddingLeft: `${padding}px` };
+    }
+  }
 };

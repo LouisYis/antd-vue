@@ -1,34 +1,16 @@
-import menuMixin from './menu-mixin';
-
 export default {
   name: 'VntItemGroup',
-  mixins: [menuMixin],
-  props: {
-    title: String,
-  },
-  data() {
-    return {
-      prefixCls: null,
-    };
-  },
-  methods: {
-    genTitle(h) {
-      return h('div', {
-        class: [`${this.prefixCls}-item-group-title`],
-      }, [this.title]);
-    },
-    genList(h) {
-      return h('div', {
-        class: [`${this.prefixCls}-item-group-list`],
-      }, [this.$slots.default]);
-    },
-  },
-  render(h) {
-    return h('div', {
-      class: [`${this.prefixCls}-item-group`],
-    }, [
-      this.genTitle(h),
-      this.genList(h),
-    ]);
-  },
+  compoenentName: 'VntItemGroup',
+  inject: ['rootMenu'],
+  render() {
+    const { rootMenu, $slots } = this;
+    const componentCls = `${rootMenu.prefixCls}-item-group`;
+
+    return (
+      <li class={`${componentCls}`}>
+        <div class={`${componentCls}-title`}>{ $slots.title }</div>
+        <ul class={`${componentCls}-list`}>{ $slots.default }</ul>
+      </li>
+    );
+  }
 };

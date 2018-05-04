@@ -17,7 +17,6 @@ const registerRoute = config => {
   Object.keys(config).forEach(lang => {
     const children = DOC_MAP[lang].keys().map(component => {
       const name = component.replace(/.+\/(.+)\/.+\.md$/, '$1');
-      console.log(component, name);
       // const name = component.split('/')[1];
       return {
         name: `component-${lang}-${name}`,

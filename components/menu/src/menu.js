@@ -63,6 +63,11 @@ export default {
       rootMenu: this
     };
   },
+  data() {
+    return {
+      openedMenus: this.defaultOpenIndex ? this.defaultOpenIndex.slice(0) : []
+    };
+  },
   render() {
     const { prefixCls, mode, theme } = this;
     const menuClass = [
