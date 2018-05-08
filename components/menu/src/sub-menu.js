@@ -1,10 +1,11 @@
 import CollapseTransition from '@/transitions/collapse';
-import menuMixin from './menu-mixin';
+import Emitter from '@/mixins/component-emitter';
+import { MenuMixin, MenuItemMixin } from './menu-mixin';
 
 export default {
   name: 'VntSubMenu',
   componentName: 'VntSubMenu',
-  mixins: [menuMixin],
+  mixins: [MenuMixin, MenuItemMixin, Emitter],
   components: { CollapseTransition },
   props: {
     index: {
@@ -12,21 +13,55 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      items: {}
+    };
+  },
   computed: {
-    isOpen() {
-      return this.rootMenu.openedMenus.indexOf(this.index) >= 0;
+    opened() {
+      return this.rootMenu.openedIndex.indexOf(this.index) >= 0;
+    },
+    active() {
+      const { items, subMenus } = this;
+      let active = false;
+
+      Object.keys(items).forEach(item => {
+        if (items[item].active) active = true;
+      });
+
+      Object.keys(subMenus).forEach(subMenu => {
+        if (subMenus[subMenu].active) active = true;
+      });
+
+      return active;
     }
+  },
+  methods: {
+    handleClick(e) {
+      const { rootMenu, disabled } = this;
+
+      if (rootMenu.mode !== 'inline' || disabled) return;
+      rootMenu.$emit('submenu-clicked', this, e);
+    }
+  },
+  created() {
+    this.parentMenu.addSubMenu(this);
   },
   render() {
     const {
-      rootMenu, $slots, indent, isOpen
+      rootMenu, $slots, indent, opened, handleClick, active
     } = this;
     const { prefixCls, mode } = rootMenu;
     const componentCls = `${prefixCls}-submenu`;
 
     const classes = [
       componentCls,
-      `${componentCls}-${mode}`
+      `${componentCls}-${mode}`,
+      {
+        [`${componentCls}-selected`]: active,
+        [`${componentCls}-open`]: opened
+      }
     ];
 
     const submenuClass = [
@@ -37,7 +72,7 @@ export default {
 
     const inlineMenu = (
       <CollapseTransition>
-        <ul class={submenuClass} v-show={isOpen}>
+        <ul class={submenuClass} v-show={opened}>
           {$slots.default}
         </ul>
       </CollapseTransition>
@@ -45,8 +80,13 @@ export default {
 
     return (
       <li class={classes}>
-        <div class={`${componentCls}-title`} style={indent}>
+        <div
+          class={`${componentCls}-title`}
+          style={indent}
+          onClick={handleClick}
+        >
           <span>{$slots.title}</span>
+          <i class="vnt-menu-submenu-arrow"></i>
         </div>
         {inlineMenu}
       </li>

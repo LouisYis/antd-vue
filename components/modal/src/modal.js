@@ -77,7 +77,7 @@ export default {
     handleClose() {
       this.modalShow = false;
       this.afterClose();
-    },
+    }
   },
   render(h) {
     const modal = h('div', {

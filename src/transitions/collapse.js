@@ -1,14 +1,15 @@
 import { addClass, removeClass } from '../utils/dom';
 
-const Transition = {
+const transition = {
   beforeEnter(el) {
-    addClass(el, 'collapse-transition');
+    addClass(el, 'vnt-motion-collapse vnt-motion-collapse-active');
     if (!el.dataset) el.dataset = {};
 
     el.dataset.oldPaddingTop = el.style.paddingTop;
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
 
-    el.style.height = '0';
+    el.style.opacity = 0;
+    el.style.height = 0;
     el.style.paddingTop = 0;
     el.style.paddingBottom = 0;
   },
@@ -16,10 +17,12 @@ const Transition = {
   enter(el) {
     el.dataset.oldOverflow = el.style.overflow;
     if (el.scrollHeight !== 0) {
+      el.style.opacity = 1;
       el.style.height = `${el.scrollHeight}px`;
       el.style.paddingTop = el.dataset.oldPaddingTop;
       el.style.paddingBottom = el.dataset.oldPaddingBottom;
     } else {
+      el.style.opacity = 1;
       el.style.height = '';
       el.style.paddingTop = el.dataset.oldPaddingTop;
       el.style.paddingBottom = el.dataset.oldPaddingBottom;
@@ -30,7 +33,8 @@ const Transition = {
 
   afterEnter(el) {
     // for safari: remove class then reset height is necessary
-    removeClass(el, 'collapse-transition');
+    removeClass(el, 'vnt-motion-collapse vnt-motion-collapse-active');
+    el.style.opacity = '';
     el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
   },
@@ -41,6 +45,7 @@ const Transition = {
     el.dataset.oldPaddingBottom = el.style.paddingBottom;
     el.dataset.oldOverflow = el.style.overflow;
 
+    el.style.opacity = 1;
     el.style.height = `${el.scrollHeight}px`;
     el.style.overflow = 'hidden';
   },
@@ -48,7 +53,8 @@ const Transition = {
   leave(el) {
     if (el.scrollHeight !== 0) {
       // for safari: add class after set height, or it will jump to zero height suddenly, weired
-      addClass(el, 'collapse-transition');
+      addClass(el, 'vnt-motion-collapse vnt-motion-collapse-active');
+      el.style.opacity = 0;
       el.style.height = 0;
       el.style.paddingTop = 0;
       el.style.paddingBottom = 0;
@@ -56,7 +62,8 @@ const Transition = {
   },
 
   afterLeave(el) {
-    removeClass(el, 'collapse-transition');
+    removeClass(el, 'vnt-motion-collapse vnt-motion-collapse-active');
+    el.style.opacity = '';
     el.style.height = '';
     el.style.overflow = el.dataset.oldOverflow;
     el.style.paddingTop = el.dataset.oldPaddingTop;
@@ -69,7 +76,7 @@ export default {
   functional: true,
   render(h, { children }) {
     const data = {
-      on: Transition
+      on: transition
     };
 
     return h('transition', data, children);

@@ -1,14 +1,18 @@
 <template>
-  <li :class="classes" :style="indent">
+  <li
+    :class="classes"
+    :style="indent"
+    @click="handleClick"
+  >
     <slot></slot>
   </li>
 </template>
 
 <script>
-import menuMixin from './menu-mixin';
+import { MenuItemMixin } from './menu-mixin';
 
 export default {
-  mixins: [menuMixin],
+  mixins: [MenuItemMixin],
   props: {
     index: {
       type: String,
@@ -16,12 +20,30 @@ export default {
     }
   },
   computed: {
+    active() {
+      return this.index === this.rootMenu.activeIndex;
+    },
     classes() {
-      const { rootMenu } = this
+      const { rootMenu, active } = this
+      const componentCls = `${rootMenu.prefixCls}-item`;
       return [
-        `${rootMenu.prefixCls}-item`
+        componentCls,
+        {
+          [`${componentCls}-selected`]: active
+        }
       ]
     }
+  },
+  methods: {
+    handleClick() {
+      if (!this.disabled) {
+        this.rootMenu.$emit('item-clicked', this);
+        this.$emit('click', this);
+      }
+    }
+  },
+  created() {
+    this.parentMenu.addItem(this);
   }
 }
 </script>

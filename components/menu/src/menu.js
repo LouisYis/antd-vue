@@ -1,6 +1,9 @@
+import { MenuMixin } from './menu-mixin';
+
 export default {
   name: 'VntMenu',
   componentName: 'VntMenu',
+  mixins: [MenuMixin],
   props: {
     defaultOpenIndex: Array,
     defaultSelectedIndex: Array,
@@ -45,14 +48,6 @@ export default {
       type: Function,
       default: () => undefined
     },
-    onOpenChange: {
-      type: Function,
-      default: () => undefined
-    },
-    onSelect: {
-      type: Function,
-      default: () => undefined
-    },
     prefixCls: {
       type: String,
       default: 'vnt-menu'
@@ -65,8 +60,43 @@ export default {
   },
   data() {
     return {
-      openedMenus: this.defaultOpenIndex ? this.defaultOpenIndex.slice(0) : []
+      openedIndex: this.defaultOpenIndex ? this.defaultOpenIndex.slice(0) : [],
+      activeIndex: undefined
     };
+  },
+  methods: {
+    closeMenu(index) {
+      const i = this.openedIndex.indexOf(index);
+
+      if (i >= 0) {
+        this.openedIndex.splice(i, 1);
+      }
+    },
+    openMenu(index) {
+      this.openedIndex.push(index);
+    },
+    handleSubmenuClick(submenu) {
+      const { index } = submenu;
+      const isOpen = this.openedIndex.indexOf(submenu.index);
+
+      if (isOpen >= 0) {
+        this.closeMenu(index);
+      } else {
+        this.openMenu(index);
+      }
+
+      this.$emit('open-change', submenu, this.openedIndex);
+    },
+    handleItemClick(item) {
+      const { index } = item;
+
+      this.activeIndex = index;
+      this.$emit('on-select', item, index);
+    }
+  },
+  mounted() {
+    this.$on('submenu-clicked', this.handleSubmenuClick);
+    this.$on('item-clicked', this.handleItemClick);
   },
   render() {
     const { prefixCls, mode, theme } = this;
