@@ -36,6 +36,10 @@ module.exports = {
     'comma-dangle': 0,
     'arrow-parens': ['error', 'as-needed'],
     'arrow-body-style': ['error', 'as-needed'],
+    'no-unused-expressions': ['error', {
+      'allowShortCircuit': true,
+      'allowTernary': true
+    }],
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       js: 'never',

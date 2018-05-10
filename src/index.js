@@ -3,6 +3,7 @@ import { Menu, MenuItem, SubMenu, Divider, MenuItemGroup } from '../components/m
 import Button from '../components/button';
 import Icon from '../components/icon';
 import Badge from '../components/badge';
+import Tooltip from '../components/tooltip';
 
 const components = {
   Row,
@@ -13,7 +14,8 @@ const components = {
   MenuItemGroup,
   Button,
   Icon,
-  Badge
+  Badge,
+  Tooltip
 };
 
 const alias = {
