@@ -58,9 +58,9 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new FriendlyErrorsWebpackPlugin({
-      clearConsole: true
-    })
-  ]
+  // plugins: [
+  //   new FriendlyErrorsWebpackPlugin({
+  //     clearConsole: true
+  //   })
+  // ]
 }

@@ -17,6 +17,7 @@ const registerRoute = config => {
   Object.keys(config).forEach(lang => {
     const children = DOC_MAP[lang].keys().map(component => {
       const name = component.replace(/.+\/(.+)\/.+\.md$/, '$1');
+      console.log(name);
       // const name = component.split('/')[1];
       return {
         name: `component-${lang}-${name}`,
@@ -27,6 +28,7 @@ const registerRoute = config => {
 
     PAGE_MAP[lang].keys().forEach(page => {
       const name = page.replace(/\.\/(.+)\.vue$/, '$1');
+      console.log(name);
       const temp = {
         name: `page-${lang}-${name}`,
         path: `/${lang}/${name}`,
