@@ -1,8 +1,36 @@
 /* eslint no-continue: 0 */
+import Vue from 'vue';
+
+const isServer = Vue.prototype.$isServer;
 
 const trim = function trim(string) {
   return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 };
+
+export const on = (function GetFunction() {
+  if (!isServer && document.addEventListener) {
+    return function On(element, event, handler) {
+      element.addEventListener(event, handler, false);
+    };
+  }
+
+  return function On(element, event, handler) {
+    element.attachEvent(`on${event}`, handler);
+  };
+}());
+
+export const off = (function GetFunction() {
+  if (!isServer && document.addEventListener) {
+    return function Off(element, event, handler) {
+      element.removeEventListener(event, handler, false);
+    };
+  }
+
+  return function Off(element, event, handler) {
+    element.detachEvent(`on${event}`, handler);
+  };
+}());
+
 
 export function hasClass(el, cls) {
   if (!el || !cls) return false;

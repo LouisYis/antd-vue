@@ -1,1 +1,3 @@
-export { default } from './src/tooltop';
+import './style';
+
+export { default } from './src/tooltip';

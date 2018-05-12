@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import getFirstComponentChild from '@/utils/vdom';
 
-const PopperJS = Vue.prototype.$isServer ? function PopperJS() {} : import('popper.js');
+const PopperJS = Vue.prototype.$isServer ? function PopperJS() {} : require('popper.js').default;
 
 export default {
   name: 'VntPopper',
@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       popperInstance: null,
-      showPopper: undefined
+      showPopper: false
     };
   },
   watch: {
@@ -24,26 +24,33 @@ export default {
     },
 
     showPopper(val) {
-      console.log(11);
       val ? this.updatePopper() : this.destroyPopper();
       this.$emit('input', val);
     }
   },
   methods: {
     initPopperInstance() {
-      const { target, getOptions } = this;
-      const referenceElement = target.$el || this.$slots.target.$el;
-      const popperNode = this.$slots.default.$el;
-      console.log(referenceElement);
+      const { appendToBody } = this;
+      const referenceElement = this.$el;
+      const popperElement = this.popperNode.$el;
+
+      if (appendToBody) document.body.appendChild(popperElement);
+      // document.body.appendChild(popperElement);
+
+      if (!referenceElement || !popperElement) return false;
 
       if (!this.popperInstance) {
         const PopperInstance = new PopperJS(
           referenceElement,
-          popperNode,
-          getOptions()
+          popperElement,
+          {
+            placement: 'top'
+          }
         );
 
         this.popperInstance = PopperInstance;
+
+        this.$nextTick(this.updatePopper);
         return true;
       }
 
@@ -58,19 +65,24 @@ export default {
       }
     },
     destroyPopper() {
-      if (this.popperInstance) {
-        this.popperInstance.destory();
-      }
+      // if (this.popperInstance) {
+      //   this.popperInstance.destroy();
+      // }
 
-      this.popperInstance = undefined;
+      // this.popperInstance = undefined;
     }
   },
-  mounted() {
-
+  beforeCreate() {
+    this.popperNode = new Vue({
+      data: { node: '' },
+      render() {
+        return this.node;
+      }
+    }).$mount();
   },
   render() {
-    console.log(this.$slots);
+    [this.popperNode.node] = this.$slots.default;
+
     return getFirstComponentChild(this.$slots.target);
-    // return null;
   }
 };
