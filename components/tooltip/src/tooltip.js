@@ -17,7 +17,6 @@ export default {
   },
   methods: {
     show() {
-      console.log(111);
       this.showPopper = true;
     },
     hide() {
@@ -47,7 +46,11 @@ export default {
     const Content = (
       <transition name="zoom-big">
         <div class={classes} v-show={showPopper}>
-          { this.$slots.content }
+          <div class={`${prefixCls}-content`}>
+            <div class={`${prefixCls}-inner`}>
+              { this.$slots.content }
+            </div>
+          </div>
         </div>
       </transition>
     );

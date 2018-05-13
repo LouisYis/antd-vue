@@ -6,7 +6,11 @@ const PopperJS = Vue.prototype.$isServer ? function PopperJS() {} : require('pop
 export default {
   name: 'VntPopper',
   props: {
-    value: Boolean
+    value: Boolean,
+    appendToBody: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -35,7 +39,6 @@ export default {
       const popperElement = this.popperNode.$el;
 
       if (appendToBody) document.body.appendChild(popperElement);
-      // document.body.appendChild(popperElement);
 
       if (!referenceElement || !popperElement) return false;
 

@@ -1,1 +1,2 @@
-export { default } from './index.less';
+import '../../style/core/motion.less';
+import './index.less';
